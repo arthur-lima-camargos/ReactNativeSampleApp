@@ -1,15 +1,15 @@
 import { usePromise } from "@/hooks/usePromise";
 import { ActivityIndicator, Button, FlatList, Text, View } from "react-native";
 import { getAllOnePieceArcs, OnePieceArc } from "@/services/onePieceApi";
+import { useCallback } from "react";
+import { FallbackWrapper } from "@/components/FallbackWrapper";
 
-export const Index = () => {
-  const { data, isLoading, isError, isSuccess, refetch } =
+export const ArcsScreen = () => {
+  const { data, refetch, ...status } =
     usePromise<OnePieceArc[]>(getAllOnePieceArcs);
   return (
     <View style={{ flex: 1, padding: 20, backgroundColor: "#B0E0E6" }}>
-      {isLoading && <ActivityIndicator />}
-      {isError && <Text>Error to get the arcs.</Text>}
-      {isSuccess && data && (
+      <FallbackWrapper {...status} refetch={refetch}>
         <FlatList
           data={data}
           renderItem={({ item }) => (
@@ -29,12 +29,12 @@ export const Index = () => {
             </View>
           )}
         />
-      )}
-      <View style={{ alignItems: "center", marginTop: 20 }}>
-        <View style={{ width: 150 }}>
-          <Button title="Reload" onPress={refetch} color={"black"} />
+        <View style={{ alignItems: "center", marginTop: 20 }}>
+          <View style={{ width: 150 }}>
+            <Button title="Reload" onPress={refetch} color={"black"} />
+          </View>
         </View>
-      </View>
+      </FallbackWrapper>
     </View>
   );
 };

@@ -1,3 +1,3 @@
-import { Index } from "@/screens";
+import { ArcsScreen } from "@/screens/arcs";
 
-export default Index;
+export default ArcsScreen;
