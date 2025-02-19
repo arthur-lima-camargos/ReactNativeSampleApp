@@ -1,14 +1,20 @@
-import { usePromise } from "@/hooks/usePromise";
-import { ActivityIndicator, Button, FlatList, Text, View } from "react-native";
-import { getAllOnePieceArcs, OnePieceArc } from "@/services/onePieceApi";
-import { useCallback } from "react";
+import { Button, FlatList, Text, View } from "react-native";
+import { getAllOnePieceArcs } from "@/services/onePieceApi";
 import { FallbackWrapper } from "@/components/FallbackWrapper";
+import { useGetAsync } from "@/hooks/useGetAsync";
 
 export const ArcsScreen = () => {
-  const { data, refetch, ...status } =
-    usePromise<OnePieceArc[]>(getAllOnePieceArcs);
+  const { data, refetch, ...status } = useGetAsync({
+    queryKey: ["arc"],
+    queryFn: getAllOnePieceArcs,
+    // staleTime: 10000,
+    // retry: 10,
+  });
+
   return (
     <View style={{ flex: 1, padding: 20, backgroundColor: "#B0E0E6" }}>
+      {status.isLoading && <Text>IS LOADING</Text>}
+      {status.isFetching && <Text>IS FETCHING</Text>}
       <FallbackWrapper {...status} refetch={refetch}>
         <FlatList
           data={data}
@@ -31,7 +37,7 @@ export const ArcsScreen = () => {
         />
         <View style={{ alignItems: "center", marginTop: 20 }}>
           <View style={{ width: 150 }}>
-            <Button title="Reload" onPress={refetch} color={"black"} />
+            <Button title="Reload" onPress={() => refetch()} color={"black"} />
           </View>
         </View>
       </FallbackWrapper>
