@@ -1,12 +1,12 @@
 import { Button, FlatList, Text, View } from "react-native";
-import { getAllOnePieceArcs } from "@/services/onePieceApi";
 import { FallbackWrapper } from "@/components/FallbackWrapper";
 import { useGetAsync } from "@/hooks/useGetAsync";
+import { getAllArcsManager } from "@/services/manager";
 
 export const ArcsScreen = () => {
   const { data, refetch, ...status } = useGetAsync({
     queryKey: ["arc"],
-    queryFn: getAllOnePieceArcs,
+    queryFn: getAllArcsManager,
     // staleTime: 10000,
     // retry: 10,
   });
