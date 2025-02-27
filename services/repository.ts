@@ -1,7 +1,7 @@
 import { ArcResponse } from "./apiResponses/types";
-import { api } from "./onePieceApi";
+import { OnePieceApi } from "./OnePieceApi";
 
 export const getAllArcsRepository = async (): Promise<ArcResponse> => {
-  const response = await api.get("/arcs/en");
+  const response = await OnePieceApi.shared().get("/arcs/en");
   return response.data;
 };
