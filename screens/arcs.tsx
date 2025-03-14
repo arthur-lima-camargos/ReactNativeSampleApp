@@ -1,4 +1,4 @@
-import { Button, FlatList, Text, TouchableOpacity, View } from "react-native";
+import { Button, FlatList, Text, View } from "react-native";
 import { FallbackWrapper } from "@/components/FallbackWrapper";
 import {
   getAllArcsManager,
@@ -8,6 +8,12 @@ import {
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { StorageApi } from "@/services/StorageApi";
 import { Arc } from "@/types/Arc";
+import {
+  FadeInDown,
+  FadeOutUp,
+  LinearTransition,
+} from "react-native-reanimated";
+import { ArcItem } from "@/components/ArcItem";
 
 export const ArcsScreen = () => {
   const { data, refetch, ...status } = useQuery({
@@ -38,29 +44,21 @@ export const ArcsScreen = () => {
           Favorite Arc: {favoriteArc.title}
         </Text>
       )}
-      {status.isLoading && <Text>IS LOADING</Text>}
-      {status.isFetching && <Text>IS FETCHING</Text>}
-      <FallbackWrapper {...status} refetch={refetch}>
+      <FallbackWrapper
+        {...status}
+        isLoading={status.isFetching}
+        refetch={refetch}
+      >
         <FlatList
           data={data}
-          renderItem={({ item }) => (
-            <TouchableOpacity
+          renderItem={({ item, index }) => (
+            <ArcItem
+              entering={FadeInDown.duration(800).delay(200 * index)}
+              exiting={FadeOutUp.duration(800)}
+              layout={LinearTransition.duration(300)}
               onPress={() => onPressArc(item)}
-              style={{ marginBottom: 20 }}
-            >
-              <Text
-                style={{
-                  fontWeight: "bold",
-                  textAlign: "justify",
-                  fontSize: 20,
-                }}
-              >
-                {item.title ?? "No data found."}
-              </Text>
-              <Text style={{ textAlign: "justify", fontSize: 16 }}>
-                {item.description ?? "No data found."}
-              </Text>
-            </TouchableOpacity>
+              {...item}
+            />
           )}
         />
         <View style={{ alignItems: "center", marginTop: 20 }}>
