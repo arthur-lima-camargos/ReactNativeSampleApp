@@ -1,3 +1,3 @@
-import { ArcsScreen } from "@/screens/arcs";
+import { HomeScreen } from "@/screens/home";
 
-export default ArcsScreen;
+export default HomeScreen;
