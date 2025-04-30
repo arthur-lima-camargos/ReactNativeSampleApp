@@ -1,10 +1,11 @@
 import { FallbackWrapper } from "@/components/FallbackWrapper";
 import { ArcItem } from "@/features/FavouriteArc/ArcItem";
-import { ArcContext, ArcList } from "@/features/FavouriteArc/ArcList";
+import { useDispatch, useSelector } from "@/hooks/useStore";
 import { getAllArcsManager } from "@/services/manager";
+import { setArcAction } from "@/store/arcSlice";
 import { Arc } from "@/types/Arc";
 import { useQuery } from "@tanstack/react-query";
-import React, { useContext } from "react";
+import React from "react";
 import { Button, FlatList, Text, View } from "react-native";
 import {
   FadeInDown,
@@ -12,8 +13,12 @@ import {
   LinearTransition,
 } from "react-native-reanimated";
 
-const HomeScreenConsumer: React.FC = () => {
-  const { value: favoriteArc, setValue: setArc } = useContext(ArcContext);
+export const HomeScreen: React.FC = () => {
+  const {
+    arc: { favorite },
+    form,
+  } = useSelector();
+  const dispatch = useDispatch();
 
   const { data, refetch, ...status } = useQuery({
     queryKey: ["arc"],
@@ -23,14 +28,14 @@ const HomeScreenConsumer: React.FC = () => {
   });
 
   const onPressArc = (item: Arc) => {
-    setArc(item);
+    dispatch(setArcAction(item));
   };
 
   return (
     <View style={{ flex: 1, padding: 20, backgroundColor: "#B0E0E6" }}>
-      {favoriteArc && (
+      {favorite && (
         <Text style={{ fontWeight: "800" }}>
-          Favorite Arc: {favoriteArc.title}
+          Favorite Arc: {favorite.title}
         </Text>
       )}
       <FallbackWrapper
@@ -59,9 +64,3 @@ const HomeScreenConsumer: React.FC = () => {
     </View>
   );
 };
-
-export const HomeScreen: React.FC = () => (
-  <ArcList>
-    <HomeScreenConsumer />
-  </ArcList>
-);

@@ -2,6 +2,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Stack } from "expo-router";
 import React from "react";
 import "../utils/reactotron";
+import { Provider } from "@/store/StoreProvider";
 
 const queryClient = new QueryClient();
 
@@ -15,8 +16,10 @@ function RootLayout() {
 
 export default function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <RootLayout />
-    </QueryClientProvider>
+    <Provider>
+      <QueryClientProvider client={queryClient}>
+        <RootLayout />
+      </QueryClientProvider>
+    </Provider>
   );
 }

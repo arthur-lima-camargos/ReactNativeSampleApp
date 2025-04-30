@@ -1,17 +1,8 @@
-import React, { forwardRef, useContext, useState } from "react";
+import React, { forwardRef, useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
-import Animated, {
-  FadeInDown,
-  FadeOutUp,
-  FlipInEasyX,
-  FlipOutEasyX,
-  LinearTransition,
-} from "react-native-reanimated";
+import Animated, { FlipInEasyX, FlipOutEasyX } from "react-native-reanimated";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { useQuery } from "@tanstack/react-query";
-import { StorageApi } from "@/services/StorageApi";
-import { getFavoriteArc } from "@/services/manager";
-import { ArcContext } from "./ArcList";
+import { useSelector } from "@/hooks/useStore";
 
 export type ArcItemProps = {
   title?: string;
@@ -23,10 +14,12 @@ const StaticArcItem = forwardRef<View, ArcItemProps>(function StaticArcItem(
   { description, onPress, title },
   ref
 ) {
-  const { value: favoriteArc } = useContext(ArcContext);
+  const {
+    arc: { favorite },
+  } = useSelector();
   const [showDescription, setShowDescription] = useState(false);
 
-  const icon = favoriteArc?.title === title ? "favorite" : "favorite-outline";
+  const icon = favorite?.title === title ? "favorite" : "favorite-outline";
   return (
     <>
       <TouchableOpacity
