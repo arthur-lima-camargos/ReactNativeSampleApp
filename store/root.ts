@@ -25,3 +25,8 @@ export function rootReducer(state: RootState, action: any): RootState {
     form: formReducer(state.form, action),
   };
 }
+
+export const store = {
+  initialState,
+  reducer: rootReducer,
+};

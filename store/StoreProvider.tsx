@@ -1,13 +1,20 @@
 import React, { createContext, PropsWithChildren, useReducer } from "react";
-import { initialState, rootReducer, RootState } from "./root";
+import { initialState, RootState } from "./root";
 
 export const Context = createContext<{
   state: RootState;
   dispatch: React.Dispatch<any>;
 }>({ state: initialState, dispatch: () => {} });
 
-export const Provider: React.FC<PropsWithChildren> = ({ children }) => {
-  const [state, dispatch] = useReducer(rootReducer, initialState);
+type ProvideProps = PropsWithChildren<{
+  store: {
+    reducer: (state: RootState, action: any) => RootState;
+    initialState: RootState;
+  };
+}>;
+
+export const Provider: React.FC<ProvideProps> = ({ children, store }) => {
+  const [state, dispatch] = useReducer(store.reducer, store.initialState);
 
   return (
     <Context.Provider value={{ state, dispatch }}>{children}</Context.Provider>

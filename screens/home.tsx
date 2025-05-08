@@ -1,8 +1,7 @@
 import { FallbackWrapper } from "@/components/FallbackWrapper";
 import { ArcItem } from "@/features/FavouriteArc/ArcItem";
-import { useDispatch, useSelector } from "@/hooks/useStore";
+import { useFavoriteArc } from "@/hooks/useFavoriteArc";
 import { getAllArcsManager } from "@/services/manager";
-import { setArcAction } from "@/store/arcSlice";
 import { Arc } from "@/types/Arc";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
@@ -14,11 +13,7 @@ import {
 } from "react-native-reanimated";
 
 export const HomeScreen: React.FC = () => {
-  const {
-    arc: { favorite },
-    form,
-  } = useSelector();
-  const dispatch = useDispatch();
+  const { favoriteArc, setFavoriteArc } = useFavoriteArc();
 
   const { data, refetch, ...status } = useQuery({
     queryKey: ["arc"],
@@ -28,14 +23,14 @@ export const HomeScreen: React.FC = () => {
   });
 
   const onPressArc = (item: Arc) => {
-    dispatch(setArcAction(item));
+    setFavoriteArc(item);
   };
 
   return (
     <View style={{ flex: 1, padding: 20, backgroundColor: "#B0E0E6" }}>
-      {favorite && (
+      {favoriteArc && (
         <Text style={{ fontWeight: "800" }}>
-          Favorite Arc: {favorite.title}
+          Favorite Arc: {favoriteArc.title}
         </Text>
       )}
       <FallbackWrapper

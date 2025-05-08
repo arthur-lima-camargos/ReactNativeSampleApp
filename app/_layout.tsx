@@ -3,6 +3,7 @@ import { Stack } from "expo-router";
 import React from "react";
 import "../utils/reactotron";
 import { Provider } from "@/store/StoreProvider";
+import { store } from "@/store/root";
 
 const queryClient = new QueryClient();
 
@@ -16,7 +17,7 @@ function RootLayout() {
 
 export default function App() {
   return (
-    <Provider>
+    <Provider store={store}>
       <QueryClientProvider client={queryClient}>
         <RootLayout />
       </QueryClientProvider>
