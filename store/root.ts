@@ -1,32 +1,20 @@
-import {
-  ArcState,
-  initialState as arcInitialState,
-  reducer as arcReducer,
-} from "./arcSlice";
-import {
-  FormState,
-  initialState as formInitialState,
-  reducer as formReducer,
-} from "./formSlice";
+import { combineReducers, createStore } from "redux";
 
-export const initialState: RootState = {
-  arc: arcInitialState,
-  form: formInitialState,
-};
+import { reducer as arcReducer } from "./arcSlice";
+import { reducer as formReducer } from "./formSlice";
+import { reactotron } from "@/utils/reactotron";
 
-export type RootState = {
-  arc: ArcState;
-  form: FormState;
-};
+export const store = createStore(
+  combineReducers({
+    arc: arcReducer,
+    form: formReducer,
+  }),
+  reactotron.createEnhancer()
+);
 
-export function rootReducer(state: RootState, action: any): RootState {
-  return {
-    arc: arcReducer(state.arc, action),
-    form: formReducer(state.form, action),
-  };
-}
-
-export const store = {
-  initialState,
-  reducer: rootReducer,
-};
+// Get the type of our store variable
+export type AppStore = typeof store;
+// Infer the `RootState` and `AppDispatch` types from the store itself
+export type RootState = ReturnType<AppStore["getState"]>;
+// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
+export type AppDispatch = AppStore["dispatch"];

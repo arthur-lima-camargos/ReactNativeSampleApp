@@ -4,9 +4,7 @@ import { setArcAction } from "@/store/arcSlice";
 import { useCallback } from "react";
 
 export const useFavoriteArc = () => {
-  const {
-    arc: { favorite },
-  } = useSelector();
+  const favorite = useSelector((state) => state.arc.favorite);
   const dispatch = useDispatch();
 
   const setFavoriteArc = useCallback(

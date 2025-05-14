@@ -31,7 +31,7 @@ export const setArcAction = (arc: Arc) => ({
   payload: arc,
 });
 
-export function reducer(state: ArcState, action: any): ArcState {
+export function reducer(state = initialState, action: any): ArcState {
   switch (action.type) {
     case ACTIONS.SET_ARC:
       return { ...state, favorite: action.payload };

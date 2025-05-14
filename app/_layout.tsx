@@ -2,8 +2,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Stack } from "expo-router";
 import React from "react";
 import "../utils/reactotron";
-import { Provider } from "@/store/StoreProvider";
 import { store } from "@/store/root";
+import { Provider } from "react-redux";
 
 const queryClient = new QueryClient();
 

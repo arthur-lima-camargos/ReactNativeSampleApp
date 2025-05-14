@@ -14,9 +14,7 @@ const StaticArcItem = forwardRef<View, ArcItemProps>(function StaticArcItem(
   { description, onPress, title },
   ref
 ) {
-  const {
-    arc: { favorite },
-  } = useSelector();
+  const favorite = useSelector((state) => state.arc.favorite);
   const [showDescription, setShowDescription] = useState(false);
 
   const icon = favorite?.title === title ? "favorite" : "favorite-outline";

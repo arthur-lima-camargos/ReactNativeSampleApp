@@ -3,7 +3,7 @@ export type FormState = {
   error: boolean;
 };
 
-export const initialState = {
+export const initialState: FormState = {
   email: "",
   error: false,
 };
@@ -22,7 +22,7 @@ export const setEmailAction = (text: string) => ({
 
 export const sendAction = () => ({ type: ACTIONS.SEND });
 
-export function reducer(state: FormState, action: any): FormState {
+export function reducer(state = initialState, action: any): FormState {
   switch (action.type) {
     case ACTIONS.SET_EMAIL:
       return { ...state, email: action.payload };
