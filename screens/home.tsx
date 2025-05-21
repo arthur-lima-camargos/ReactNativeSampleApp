@@ -18,8 +18,6 @@ export const HomeScreen: React.FC = () => {
   const { data, refetch, ...status } = useQuery({
     queryKey: ["arc"],
     queryFn: getAllArcsManager,
-    // staleTime: 10000,
-    // retry: 10,
   });
 
   const onPressArc = (item: Arc) => {

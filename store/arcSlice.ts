@@ -1,3 +1,5 @@
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
 import { Arc } from "@/types/Arc";
 
 export type ArcState = {
@@ -20,22 +22,19 @@ export const initialState: ArcState = {
   },
 };
 
-const PREFIX = "@ARC/";
-
-const ACTIONS = {
-  SET_ARC: `${PREFIX}SET_ARC`,
-};
-
-export const setArcAction = (arc: Arc) => ({
-  type: ACTIONS.SET_ARC,
-  payload: arc,
+const arcSlice = createSlice({
+  name: "arc",
+  initialState,
+  reducers: {
+    setArc: (state, action: PayloadAction<Arc>) => {
+      state.favorite = action.payload;
+    },
+    reset: () => {
+      return initialState;
+    },
+  },
 });
 
-export function reducer(state = initialState, action: any): ArcState {
-  switch (action.type) {
-    case ACTIONS.SET_ARC:
-      return { ...state, favorite: action.payload };
-    default:
-      return state;
-  }
-}
+export const { setArc: setArcAction, reset: resetAction } = arcSlice.actions;
+
+export const reducer = arcSlice.reducer;

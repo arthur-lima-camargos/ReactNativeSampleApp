@@ -1,16 +1,18 @@
-import { combineReducers, createStore } from "redux";
+import { configureStore } from "@reduxjs/toolkit";
 
 import { reducer as arcReducer } from "./arcSlice";
 import { reducer as formReducer } from "./formSlice";
 import { reactotron } from "@/utils/reactotron";
 
-export const store = createStore(
-  combineReducers({
+export const store = configureStore({
+  reducer: {
     arc: arcReducer,
     form: formReducer,
-  }),
-  reactotron.createEnhancer()
-);
+  },
+  enhancers: (getDefaultEnhancers) => {
+    return getDefaultEnhancers().concat(reactotron.createEnhancer());
+  },
+});
 
 // Get the type of our store variable
 export type AppStore = typeof store;
