@@ -120,3 +120,130 @@ A aplicação demonstra o consumo de uma API do One Piece, exibindo arcos da his
 - Estratégias de fetching e caching de dados
 - Componentização para reusabilidade
 - Tipagem forte com TypeScript para melhor manutenibilidade
+
+---
+
+## English Version
+
+# React Native Sample App - Mentorship
+
+This project was developed during a React Native mentorship, using modern libraries and best practices to build a scalable and maintainable mobile application.
+
+## Technologies Used
+
+- **React Native with Expo**: Cross-platform mobile development framework
+- **TypeScript**: Strongly typed language to improve maintainability and reduce runtime errors
+- **Expo Router**: File-based routing system for navigation
+- **Redux Toolkit**: Global state management
+- **React Query**: Server state and data fetching management
+- **Axios**: HTTP client for API requests
+- **Async Storage**: Persistent local storage
+- **Reanimated**: High-performance animations
+- **Reactotron**: Debugging tool for React Native
+
+## Project Structure
+
+The project follows a modular and scalable organization:
+
+```
+app/                    # Routes and navigation (Expo Router)
+  _layout.tsx           # Main application layout
+  (tabs)/               # Tabs organization
+    _layout.tsx         # Tabs layout
+    form.tsx            # Route for the form
+    index.tsx           # Main route (home)
+components/             # Reusable components
+features/               # Feature-specific modules
+hooks/                  # Custom hooks
+screens/                # App screens
+services/               # API services and data managers
+store/                  # Redux configuration and slices
+types/                  # Type definitions
+utils/                  # Utilities
+```
+
+## Topics Covered in the Mentorship
+
+### 1. State Management
+
+- **Redux Toolkit**: Store configuration, slices and reducers to handle global state
+  - Slices for different domains (arcs and forms)
+  - Type-safe store with TypeScript
+  - Reactotron integration for debugging
+
+### 2. Custom Hooks
+
+- **useStore**: Typed access to the Redux store
+- **useForm**: Form handling with basic validation
+- **useFavoriteArc**: Favorite arc management logic
+- **usePromise**: Abstraction for handling async operations
+
+### 3. Data Fetching and Server State
+
+- **React Query**: Used for fetching, caching and synchronizing server data
+- Layered services architecture:
+  - API: HTTP client setup (axios)
+  - Repository: Direct API access functions
+  - Manager: Business logic and data transformation
+  - Storage: Local persistence using AsyncStorage
+
+### 4. Reusable Components and Patterns
+
+- **FallbackWrapper**: Pattern to handle loading, error and success states
+- **ArcItem**: Presentational component with animations
+- Use of `forwardRef` and creation of animated components
+
+### 5. Animations and UI
+
+- **Reanimated**: Implementing performant animations (FadeIn, FadeOut, Flip)
+- Component styling and simple theming
+- Use of icons and visual assets from Expo
+
+### 6. Navigation and Routing
+
+- **Expo Router**: File-based navigation system
+- Tabs and stacks organization for routes
+
+### 7. TypeScript Best Practices
+
+- Typing components, props and state
+- Generic types for reusable code
+- Interfaces/types for API responses
+
+### 8. Debugging and Performance
+
+- **Reactotron**: Monitor Redux actions and app state
+- Use of `useMemo` for render optimization
+- Handling errors and loading states
+
+## Main Use Case: One Piece Arcs
+
+The app demonstrates consuming a One Piece API to display story arcs and allows:
+
+- Listing all arcs
+- Filtering arcs by title
+- Marking arcs as favorites
+- Viewing arc details
+- Persisting favorite state locally
+
+## Getting Started
+
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+2. Start the app:
+
+```bash
+npx expo start
+```
+
+## Additional Learnings
+
+- Separation of concerns with layered architecture
+- Local vs global state strategies
+- Data fetching and caching strategies
+- Componentization for reusability
+- Strong typing with TypeScript for maintainability
