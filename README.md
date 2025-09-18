@@ -1,50 +1,122 @@
-# Welcome to your Expo app 👋
+# React Native Sample App - Mentoria
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Este é um projeto desenvolvido durante uma mentoria em React Native, utilizando as melhores práticas e bibliotecas modernas para criar uma aplicação móvel robusta e escalável.
 
-## Get started
+## Tecnologias Utilizadas
 
-1. Install dependencies
+- **React Native com Expo**: Framework para desenvolvimento de aplicações móveis cross-platform
+- **TypeScript**: Linguagem tipada que melhora a manutenção e prevenção de erros
+- **Expo Router**: Sistema de roteamento baseado em arquivos para navegação
+- **Redux Toolkit**: Gerenciamento de estado global da aplicação
+- **React Query**: Gerenciamento de estado do servidor e requisições HTTP
+- **Axios**: Cliente HTTP para comunicação com APIs
+- **Async Storage**: Armazenamento local persistente
+- **Reanimated**: Biblioteca para animações performáticas
+- **Reactotron**: Ferramenta de debugging para React Native
+
+## Estrutura do Projeto
+
+O projeto está organizado seguindo uma arquitetura modular e escalável:
+
+```
+app/                    # Rotas e navegação (Expo Router)
+  _layout.tsx           # Layout principal da aplicação
+  (tabs)/               # Organização de tabs
+    _layout.tsx         # Layout das tabs
+    form.tsx            # Rota para o formulário
+    index.tsx           # Rota principal (home)
+components/             # Componentes reutilizáveis
+features/               # Funcionalidades específicas
+hooks/                  # Custom hooks
+screens/                # Telas da aplicação
+services/               # Serviços de API e gerenciamento de dados
+store/                  # Configuração do Redux e slices
+types/                  # Definições de tipos
+utils/                  # Utilitários
+```
+
+## Conceitos Abordados na Mentoria
+
+### 1. Gerenciamento de Estado
+
+- **Redux Toolkit**: Configuração de store, slices e reducers para gerenciar estados globais
+  - Criação de slices para diferentes domínios (arcs e forms)
+  - Tipagem do store com TypeScript
+  - Integração com Reactotron para debugging
+
+### 2. Custom Hooks
+
+- **useStore**: Hook para acessar o store Redux com tipagem correta
+- **useForm**: Gerenciamento de formulários com validação
+- **useFavoriteArc**: Lógica de gerenciamento de arcos favoritos
+- **usePromise**: Abstração para lidar com operações assíncronas
+
+### 3. Consulta de Dados e Gerenciamento de Estado do Servidor
+
+- **React Query**: Utilizado para buscar e cachear dados da API
+- Estrutura de serviços em camadas:
+  - API: Configuração do cliente HTTP (axios)
+  - Repository: Funções para acesso direto à API
+  - Manager: Lógica de negócio e transformação de dados
+  - Storage: Persistência local com AsyncStorage
+
+### 4. Componentes Reutilizáveis e Patterns
+
+- **FallbackWrapper**: Pattern para tratar estados de loading, erro e sucesso
+- **ArcItem**: Componente de apresentação com animações
+- Uso de `forwardRef` e criação de componentes animados
+
+### 5. Animações e UI
+
+- **Reanimated**: Implementação de animações performáticas (FadeIn, FadeOut, Flip)
+- Estilização de componentes e uso de temas
+- Uso de ícones e elementos visuais da biblioteca Expo
+
+### 6. Navegação e Roteamento
+
+- **Expo Router**: Sistema de navegação baseado em arquivos
+- Organização de rotas com tabs e stacks
+
+### 7. Boas Práticas de Typescript
+
+- Tipagem de componentes, props e estados
+- Uso de tipos genéricos para reutilização de código
+- Definição de interfaces para dados da API
+
+### 8. Debugging e Performance
+
+- **Reactotron**: Configuração para monitoramento de estados e ações Redux
+- Uso de `useMemo` para otimização de renderização
+- Tratamento de erros e estados de loading
+
+## Caso de Uso Principal: One Piece Arcs
+
+A aplicação demonstra o consumo de uma API do One Piece, exibindo arcos da história e permitindo:
+
+- Listar todos os arcos
+- Filtrar arcos por título
+- Marcar arcos como favoritos
+- Visualizar detalhes dos arcos
+- Persistir o estado de favoritos
+
+## Começando
+
+1. Instale as dependências:
 
    ```bash
    npm install
    ```
 
-2. Start the app
+2. Inicie o aplicativo:
 
    ```bash
-    npx expo start
+   npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+## Aprendizados Adicionais
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- Separação de responsabilidades com arquitetura em camadas
+- Gerenciamento de estado local vs global
+- Estratégias de fetching e caching de dados
+- Componentização para reusabilidade
+- Tipagem forte com TypeScript para melhor manutenibilidade
